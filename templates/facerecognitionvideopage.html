@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Smart Geobag Counting System </title>
+</head>
+<body>
+<div class = "Top-Section">
+
+    <div class="top_bar">
+        <div class = "logo">
+          <a href=""><img src="{% static 'images/logo.png' %}"  alt="" >
+            </a>
+        <h1>Smart Geobag Counting System</h1>
+
+    </div>
+
+    </div>
+</div>
+
+<div class="body-section">
+
+    <div class="form-container">
+        <h2>Upload Video and Figure</h2>
+        <form action="{% url 'facerecognitionvideoinsert' %}"  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputVideo" class="form-label">Toonification Video Upload</label>
+              <input type="file" class="form-control" id="exampleInputVideo" name="recognition_video" accept="video/*" onchange="previewVideo(event)">
+          </div>
+          <div id="videoPreviewContainer" class="mb-4" style="display: none;">
+              <video id="videoPreview" width="400" controls>
+                  Your browser does not support HTML5 video.
+              </video>
+          </div>
+          
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+
+</div>
+
+
+
+<script>
+  function previewVideo(event) {
+      const video = document.getElementById('videoPreview');
+      const videoFile = event.target.files[0];
+      const videoURL = URL.createObjectURL(videoFile);
+      video.src = videoURL;
+      document.getElementById('videoPreviewContainer').style.display = 'block';
+  }
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
